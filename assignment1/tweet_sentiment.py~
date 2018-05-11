@@ -1,0 +1,29 @@
+import sys
+import json
+
+def hw():
+    print 'Hello, world!'
+
+def lines(fp):
+    print str(len(fp.readlines()))
+
+def dictionary(sentiment_file):
+	scores = {} # initialize an empty dictionary
+	for line in sentiment_file:
+  		term, score  = line.split("\t")  # The file is tab-delimited. "\t" means "tab character"
+  		scores[term] = int(score)  # Convert the score to an integer.
+
+	return scores
+
+def main():
+	sent_file = open(sys.argv[1])
+	tweet_file = open(sys.argv[2])
+
+	dict = dictionary(sent_file)
+	
+	for line in tweet_file:
+		tweets = json.load(line)
+		print tweets		
+
+if __name__ == '__main__':
+    main()
